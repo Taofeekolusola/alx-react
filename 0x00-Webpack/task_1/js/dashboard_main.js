@@ -1,24 +1,21 @@
 import $ from 'jquery';
-import debounce from 'lodash/debounce';
+import _ from 'lodash';
 
-function addElements() {
-    const $dashboardTitle = $('<p>').text('Holberton Dashboard');
-    const $dashboardInfo = $('<p>').text('Dashboard data for the students');
-    const $startButton = $('<button>').text('Click here to get started');
-    const $countParagraph = $('<p>').attr('id', 'count');
-    const $copyright = $('<p>').text('Copyright - Holberton School');
+let count = 0;
 
-    $('body').append($dashboardTitle, $dashboardInfo, $startButton, $countParagraph, copyright);
-
-    $startButton.on('click', debounce(updateCounter, 300));
-}
-
-let clickCount = 0;
 function updateCounter() {
-    clickCount++;
-    $('#count').text(`${clickCount} clicks on the button`);
+    count++;
+    $('#count').text(`${count} clicks on the button`);
 }
 
 $(document).ready(function() {
-    addElements();
+    const $dashboardTitle = $('<p>').text('Holberton Dashboard');
+    const $dashboardData = $('<p>').text('Dashboard data for the students');
+    const $button = $('<button>').text('Click here to get started');
+    const $count = $('<p>').attr('id', 'count');
+    const $copyright = $('<p>').text('Copyright - Holberton School');
+
+    $('body').append($dashboardTitle, $dashboardData, $button, $count, $copyright);
+
+    $button.on('click', _.debounce(updateCounter, 500));
 });
